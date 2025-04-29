@@ -79,7 +79,7 @@
 
         <div class="row">
           <div class="col-lg-4">
-            <img src="assets/img/profile-img.jpg" class="img-fluid" alt="">
+            <img src="assets\extra\IMG_8291.jpg" class="img-fluid" alt="Profile Image">
           </div>
           <div class="col-lg-8 pt-4 pt-lg-0 content">
             <h3>Career Objective</h3>
@@ -98,7 +98,18 @@
               </div>
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>25</span></li>
+                    <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span id="age"></span></li>
+          <script>
+            // Calculate age based on the birthdate
+            const birthDate = new Date(2000, 8, 18); // Year, Month (0-indexed), Day
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+            }
+            document.getElementById('age').textContent = age;
+          </script>
                   <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Bachelor</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>verjinvargheese@gmail.com</span></li>
                 </ul>
@@ -336,6 +347,56 @@
       </div>
     </section><!-- End Projects Section -->
 
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Gallery</h2>
+            <p>Here are my pics</p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/extra/IMG20241123232927.jpg" class="img-fluid" alt="Gallery Image 1">
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/extra/IMG20250112103731.jpg" class="img-fluid" alt="Gallery Image 2">
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/extra/IMG20250114224558.jpg" class="img-fluid" alt="Gallery Image 3">
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/extra/IMG_8291.jpg" class="img-fluid" alt="Gallery Image 4">
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/extra/IMG_7575.jpg" class="img-fluid" alt="Gallery Image 5">
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/extra/IMG_8330.jpg" class="img-fluid" alt="Gallery Image 6">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
@@ -406,9 +467,68 @@
   </footer><!-- End Footer -->
 
   <div id="preloader">
-    <div data-loader="dual-ring"></div>
-    
+    <div class="loader">
+      <div class="heart">
+        <div></div>
+        <div></div>
+      </div>
+      <p>Loading with love...</p>
+    </div>
   </div>
+  <style>
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .loader {
+      text-align: center;
+    }
+    .heart {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      transform: rotate(-45deg);
+      animation: pulse 1.5s infinite;
+    }
+    .heart div {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: #ff6b6b;
+      border-radius: 50%;
+    }
+    .heart div:first-child {
+      top: 0;
+      left: 25px;
+    }
+    .heart div:last-child {
+      top: 25px;
+      left: 0;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1) rotate(-45deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(-45deg);
+      }
+    }
+    p {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+  </style>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
@@ -424,7 +544,6 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
 </body>
 
 </html>
