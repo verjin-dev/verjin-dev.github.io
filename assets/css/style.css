@@ -679,6 +679,7 @@ section {
   display: inline-block;
   background: linear-gradient(90deg, #0563bb, #0678e3);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   border-bottom: 4px solid #0563bb;
   animation: gradient-border 3s infinite alternate;
@@ -714,7 +715,7 @@ section {
   text-transform: uppercase;
   font-family: "Poppins", sans-serif;
   background: linear-gradient(90deg, #0563bb, #0678e3);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 15px;
   letter-spacing: 0.8px;
@@ -757,7 +758,7 @@ section {
 .resume .resume-item ul li::before {
   content: "•";
   background: linear-gradient(90deg, #0563bb, #0678e3);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 18px;
   position: absolute;
