@@ -502,7 +502,9 @@
   <!-- Preloader -->
   <div id="preloader">
     <div class="loader"></div>
+    <div class="explosion" id="explosion"></div>
   </div>
+  
   
   
   
@@ -521,6 +523,29 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    // Simulate loading time (you can link to your actual content loaded event)
+    window.addEventListener('load', () => {
+      const loader = document.querySelector('.loader');
+      const explosion = document.getElementById('explosion');
+      const preloader = document.getElementById('preloader');
+  
+      // Stop spinner
+      loader.style.display = 'none';
+  
+      // Trigger explosion
+      explosion.classList.add('active');
+  
+      // Fade out preloader after animation
+      setTimeout(() => {
+        preloader.style.opacity = '0';
+        preloader.style.pointerEvents = 'none';
+      }, 1000); // match with explode animation duration
+    });
+  </script>
+  
+
   <script>
     const form = document.querySelector('.php-email-form');
     form.addEventListener('submit', async (event) => {
