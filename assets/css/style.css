@@ -1271,3 +1271,16 @@ section {
   font-size: 32px;
   font-weight: 600;
 }
+
+
+.insta-widget-wrapper {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.snapwidget-widget {
+  width: 100% !important;
+  height: auto;
+  aspect-ratio: 3 / 2; /* or use a fixed height like 510px */
+  display: block;
+}
