@@ -1262,3 +1262,12 @@ section {
     opacity: 0;
   }
 }
+
+.gallery-instagram {
+  padding: 60px 0;
+  background-color: #f9f9f9;
+}
+.gallery-instagram .section-title h2 {
+  font-size: 32px;
+  font-weight: 600;
+}
