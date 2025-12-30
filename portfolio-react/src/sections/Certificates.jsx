@@ -1,5 +1,41 @@
 const certificates = [
   {
+    title: "Generative AI Fundamentals",
+    issuer: "Databricks",
+    image:
+      "https://www.databricks.com/sites/default/files/2023-06/fundamentals-badge-generative-lp.png",
+  },
+  {
+    title: "OPSWAT Introduction to Critical Infrastructure Protection (ICIP)",
+    issuer: "OPSWAT",
+    image:
+      "https://images.credly.com/size/80x80/images/f9f3c533-9b5a-47eb-8a3e-5734663116c0/image.png",
+  },
+  {
+    title: "CompTIA Security+ ce Certification",
+    issuer: "CompTIA",
+    image:
+      "https://images.credly.com/size/340x340/images/80d8a06a-c384-42bf-ad36-db81bce5adce/blob",
+  },
+  {
+    title: "Oracle Certified Foundations Associate, Java",
+    issuer: "Oracle",
+    image:
+      "https://images.credly.com/size/340x340/images/aeada4ab-bd8f-4c3c-bf4a-a9f2f4e04dd2/02a_Java_Foundations_Associate.png",
+  },
+  {
+    title: "Python for Data Science",
+    issuer: "IBM",
+    image:
+      "https://images.credly.com/size/80x80/images/b40db465-587f-45eb-a854-af8630a630e7/blob",
+  },
+  {
+    title: "Python Essentials 1",
+    issuer: "Cisco",
+    image:
+      "https://images.credly.com/size/80x80/images/68c0b94d-f6ac-40b1-a0e0-921439eb092e/image.png",
+  },
+  {
     title: "Microsoft Certified: Azure AI Engineer Associate (AI-102)",
     issuer: "Microsoft",
     image:
