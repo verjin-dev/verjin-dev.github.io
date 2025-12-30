@@ -50,8 +50,8 @@ const projects = [
     title: "Church Management System",
     image: "/projects/Project.webp",
     description:
-      "A comprehensive system to manage church activities, member records, and event scheduling. with financial tracking. using Flutter for cross-platform accessibility.",
-    tech: ["Flutter", "Flask", "PostgreSQL", "Tailwind", "REST API"],
+      "Comprehensive system to manage church activities, member records, events, and financial tracking using Flutter.",
+    tech: ["Flutter", "Flask", "PostgreSQL", "REST API"],
     code: "",
     demo: "",
   },
@@ -59,24 +59,28 @@ const projects = [
     title: "RS Communication Portfolio Website",
     image: "/projects/Project.webp",
     description:
-      "Portfolio website for RS Communication showcasing services, projects, and client testimonials with a modern design.",
-    tech: ["React", "Whatsapp API", "PostgreSQL", "Tailwind", "REST API"],
-    code: "https://github.com/rs-communication/rs-communication",
+      "Portfolio website for RS Communication showcasing services, projects, and client testimonials with a modern UI.",
+    tech: ["React", "WhatsApp API", "PostgreSQL", "Tailwind"],
+    code: "https://github.com/rs-communication/rs-communication.git",
     demo: "https://rs-communication.github.io/rs-communication/",
   },
 ]
 
 export default function Projects() {
   return (
-    <section id="projects" className="bg-white py-28">
+    <section
+      id="projects"
+      className="bg-white dark:bg-slate-950 py-28"
+    >
       <div className="max-w-7xl mx-auto px-8">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-semibold text-slate-900">
+          <h2 className="text-3xl md:text-4xl font-semibold
+                         text-slate-900 dark:text-white">
             Featured Projects
           </h2>
-          <p className="mt-4 text-slate-600">
+          <p className="mt-4 text-slate-600 dark:text-slate-400">
             Selected projects showcasing experience in AI systems,
             full-stack development, and scalable architectures.
           </p>
@@ -87,12 +91,15 @@ export default function Projects() {
           {projects.map(project => (
             <article
               key={project.title}
-              className="rounded-2xl border border-slate-200
-                         bg-white overflow-hidden
-                         shadow-sm hover:shadow-md transition"
+              className="rounded-2xl border
+                         border-slate-200 dark:border-slate-800
+                         bg-white dark:bg-slate-900
+                         overflow-hidden
+                         shadow-sm hover:shadow-md
+                         transition"
             >
               {/* Image */}
-              <div className="h-48 bg-slate-100 overflow-hidden">
+              <div className="h-48 bg-slate-100 dark:bg-slate-800 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -104,11 +111,12 @@ export default function Projects() {
 
               {/* Content */}
               <div className="p-6 flex flex-col h-full">
-                <h3 className="font-medium text-slate-900">
+                <h3 className="font-medium text-slate-900 dark:text-white">
                   {project.title}
                 </h3>
 
-                <p className="mt-3 text-slate-600 text-sm leading-relaxed">
+                <p className="mt-3 text-slate-600 dark:text-slate-400
+                              text-sm leading-relaxed">
                   {project.description}
                 </p>
 
@@ -118,8 +126,9 @@ export default function Projects() {
                     <span
                       key={item}
                       className="px-3 py-1 rounded-full
-                                 bg-slate-100 text-sm
-                                 text-slate-700"
+                                 bg-slate-100 dark:bg-slate-800
+                                 text-sm
+                                 text-slate-700 dark:text-slate-300"
                     >
                       {item}
                     </span>
@@ -135,11 +144,12 @@ export default function Projects() {
                       rel="noreferrer"
                       className="inline-flex items-center gap-2
                                  px-4 py-2 rounded-lg
-                                 border border-slate-300
-                                 text-sm text-slate-700
-                                 hover:bg-slate-100 transition"
+                                 border border-slate-300 dark:border-slate-700
+                                 text-sm text-slate-700 dark:text-slate-300
+                                 hover:bg-slate-100 dark:hover:bg-slate-800
+                                 transition"
                     >
-                      <Github size={16} />
+                      <Github size={16} aria-hidden />
                       Code
                     </a>
                   )}
@@ -150,10 +160,13 @@ export default function Projects() {
                       rel="noreferrer"
                       className="inline-flex items-center gap-2
                                  px-4 py-2 rounded-lg
-                                 bg-slate-900 text-white
-                                 text-sm hover:bg-slate-800 transition"
+                                 bg-slate-900 dark:bg-white
+                                 text-white dark:text-slate-900
+                                 text-sm
+                                 hover:bg-slate-800 dark:hover:bg-slate-200
+                                 transition"
                     >
-                      <ExternalLink size={16} />
+                      <ExternalLink size={16} aria-hidden />
                       Demo
                     </a>
                   )}

@@ -18,9 +18,9 @@ export default function App() {
       {/* Main Content */}
       <main className="pt-16">
         <Hero />
-        <Skills />
         <Experience />
         <Education />
+        <Skills />
         <Projects />
         <Certificates />
         <Contact />

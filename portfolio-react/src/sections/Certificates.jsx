@@ -29,15 +29,16 @@ export default function Certificates() {
   return (
     <section
       id="certificates"
-      className="bg-white py-28"
+      className="bg-white dark:bg-slate-950 py-28"
     >
       <div className="max-w-7xl mx-auto px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-semibold text-slate-900">
+          <h2 className="text-3xl md:text-4xl font-semibold
+                         text-slate-900 dark:text-white">
             Certifications
           </h2>
-          <p className="mt-4 text-slate-600">
+          <p className="mt-4 text-slate-600 dark:text-slate-400">
             Industry-recognized certifications validating expertise in
             cloud platforms, AI systems, and modern engineering practices.
           </p>
@@ -48,22 +49,30 @@ export default function Certificates() {
           {certificates.map(cert => (
             <div
               key={cert.title}
-              className="rounded-2xl border border-slate-200
-                         bg-white p-6
+              className="rounded-2xl border
+                         border-slate-200 dark:border-slate-800
+                         bg-white dark:bg-slate-900
+                         p-6
                          shadow-sm hover:shadow-md
                          transition text-center"
             >
               <img
                 src={cert.image}
                 alt={cert.title}
+                loading="lazy"
+                decoding="async"
                 className="mx-auto h-24 object-contain"
               />
 
-              <h3 className="mt-6 text-sm font-medium text-slate-900 leading-snug">
+              <h3
+                className="mt-6 text-sm font-medium leading-snug
+                           text-slate-900 dark:text-white"
+              >
                 {cert.title}
               </h3>
 
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm
+                            text-slate-600 dark:text-slate-400">
                 {cert.issuer}
               </p>
             </div>

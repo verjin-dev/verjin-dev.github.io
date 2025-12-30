@@ -1,3 +1,4 @@
+import { title } from "framer-motion/client"
 import {
   Code,
   Settings,
@@ -11,7 +12,78 @@ const skills = [
   {
     title: "Programming Languages",
     icon: Code,
-    items: ["JavaScript", "TypeScript", "SQL", "Python"],
+    items: ["JavaScript", "Java", "SQL", "Python", "HTML", "CSS", "Dart"],
+  },
+  {
+    title: "Generative AI Tools",
+    icon: Beaker,
+    items: [
+      "OpenAI GPT",
+      "Azure OpenAI",
+      "GPT-4all",
+      "Gemini AI",
+      "Hugging Face Transformers",
+      "LangChain",
+      "langgraph",
+      "Ollama",
+      "LLM",
+      "RAG",
+      "Vector Databases",
+      "Llama.cpp",
+    ],
+  },
+  {
+    title: "Cloud Platforms",
+    icon: Cloud,
+    items: ["AWS", "Azure", "GCP", "Firebase", "Heroku", "render.com"],
+  },
+  {
+    title: "Gen AI & Machine Learning",
+    icon: Beaker,
+    items: [
+      "OpenAI GPT",
+      "Hugging Face Transformers",
+      "LangChain",
+      "langgraph",
+      "Llama.cpp",
+      "FastAPI",
+      "scikit-learn",
+      "pandas",
+      "NumPy",
+      "TensorFlow",
+      "PyTorch",
+      "Azure AI Services",
+      "Azure Cognitive Search",
+      "Azure Machine Learning",
+      "kaggle",
+
+    ],
+  },
+  {
+    title: "Agent Frameworks",
+    icon: Beaker,
+    items: [
+      "LangChain Agents",
+      "Autogen",
+      "Langgraph Agents",
+      "Copilot Agents",
+      "Copilot Studio",
+    ],
+  },
+  {
+    title: "frontend Development",
+    icon: Globe,
+    items: ["React.js", "Next.js", "Tailwind CSS", "Chakra UI", "Framer Motion", "Three.js", "flutter"],
+  },
+  {
+    title: "Version Control",
+    icon: Settings,
+    items: ["Git", "GitHub", "GitLab", "Bitbucket","Azure DevOps","GitHub Actions","CI/CD", "Jenkins", "Jira"],
+  },
+  {
+    title: "Databases",
+    icon: Database,
+    items: ["MongoDB", "PostgreSQL", "MySQL", "SQLite", "Redis", "Firebase Firestore", "weaviate", "Pinecone", "neo4j", "quadrant" ],
   },
   {
     title: "DevOps & Tools",
@@ -23,6 +95,8 @@ const skills = [
       "CI/CD",
       "Terraform",
       "Azure",
+      "GitHub Actions",
+      "AWS",
     ],
   },
   {
@@ -40,33 +114,35 @@ const skills = [
   {
     title: "Web Frameworks",
     icon: Database,
-    items: ["Express.js", "Fastify"],
+    items: ["Express.js", "Fastify", "Flask", "Spring Boot", "Tailwind CSS", "Bootstrap", "Material UI", "Chakra UI", "Framer Motion", "Three.js"],
   },
   {
     title: "Backend as a Service",
     icon: Cloud,
-    items: ["Firebase", "Appwrite"],
+    items: ["Firebase", "Appwrite", "render.com", "Supabase", "Heroku", "netlify" , "Vercel"],
   },
   {
     title: "Testing",
     icon: Beaker,
-    items: ["Jest"],
+    items: ["Jest", "pytest","python unittest"],
   },
+
 ]
 
 export default function Skills() {
   return (
     <section
       id="skills"
-      className="bg-white py-28"
+      className="bg-white dark:bg-slate-950 py-28"
     >
       <div className="max-w-7xl mx-auto px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-semibold text-slate-900">
+          <h2 className="text-3xl md:text-4xl font-semibold
+                         text-slate-900 dark:text-white">
             Technical Skills
           </h2>
-          <p className="mt-4 text-slate-600">
+          <p className="mt-4 text-slate-600 dark:text-slate-400">
             Comprehensive expertise across modern development stacks with
             focus on scalable web applications and DevOps practices.
           </p>
@@ -77,19 +153,23 @@ export default function Skills() {
           {skills.map(({ title, icon: Icon, items }) => (
             <div
               key={title}
-              className="rounded-2xl border border-slate-200
-                         bg-white p-6
+              className="rounded-2xl border
+                         border-slate-200 dark:border-slate-800
+                         bg-white dark:bg-slate-900
+                         p-6
                          shadow-sm hover:shadow-md transition"
             >
               <div className="flex items-center gap-3">
                 <div
                   className="w-10 h-10 rounded-lg
                              flex items-center justify-center
-                             bg-slate-100 text-slate-700"
+                             bg-slate-100 dark:bg-slate-800
+                             text-slate-700 dark:text-slate-300"
                 >
-                  <Icon size={20} />
+                  <Icon size={20} aria-hidden />
                 </div>
-                <h3 className="font-medium text-slate-900">
+                <h3 className="font-medium
+                               text-slate-900 dark:text-white">
                   {title}
                 </h3>
               </div>
@@ -99,8 +179,9 @@ export default function Skills() {
                   <span
                     key={item}
                     className="px-3 py-1 rounded-full
-                               bg-slate-100 text-sm
-                               text-slate-700"
+                               bg-slate-100 dark:bg-slate-800
+                               text-sm
+                               text-slate-700 dark:text-slate-300"
                   >
                     {item}
                   </span>

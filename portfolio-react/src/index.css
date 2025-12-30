@@ -2,13 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-slate-50 text-slate-800 antialiased;
-}
-
+html,
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Ubuntu, Cantarell, "Helvetica Neue",
     Arial, sans-serif;
+  @apply antialiased;
 }
 
+html,
+body {
+  @apply bg-slate-50 text-slate-800;
+}
+
+html.dark,
+html.dark body {
+  @apply bg-slate-950 text-slate-100;
+}
