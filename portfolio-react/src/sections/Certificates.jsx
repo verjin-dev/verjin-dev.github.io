@@ -1,3 +1,5 @@
+import { motion } from "framer-motion"
+
 const certificates = [
   {
     title: "Generative AI Fundamentals",
@@ -81,25 +83,40 @@ export default function Certificates() {
         </div>
 
         {/* Grid */}
-        <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {certificates.map(cert => (
-            <div
+        <div className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {certificates.map((cert, index) => (
+            <motion.article
               key={cert.title}
-              className="rounded-2xl border
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="group rounded-2xl border
                          border-slate-200 dark:border-slate-800
                          bg-white dark:bg-slate-900
                          p-6
                          shadow-sm hover:shadow-md
                          transition text-center"
             >
-              <img
-                src={cert.image}
-                alt={cert.title}
-                loading="lazy"
-                decoding="async"
-                className="mx-auto h-24 object-contain"
-              />
+              {/* Badge */}
+              <div
+                className="mx-auto h-24 w-24
+                           flex items-center justify-center
+                           rounded-xl
+                           bg-slate-50 dark:bg-slate-800
+                           group-hover:scale-105
+                           transition-transform"
+              >
+                <img
+                  src={cert.image}
+                  alt={cert.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-20 w-20 object-contain"
+                />
+              </div>
 
+              {/* Title */}
               <h3
                 className="mt-6 text-sm font-medium leading-snug
                            text-slate-900 dark:text-white"
@@ -107,11 +124,14 @@ export default function Certificates() {
                 {cert.title}
               </h3>
 
-              <p className="mt-2 text-sm
-                            text-slate-600 dark:text-slate-400">
+              {/* Issuer */}
+              <p
+                className="mt-2 text-xs uppercase tracking-wide
+                           text-slate-500 dark:text-slate-400"
+              >
                 {cert.issuer}
               </p>
-            </div>
+            </motion.article>
           ))}
         </div>
       </div>

@@ -5,17 +5,42 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen
-                 bg-white dark:bg-slate-950
-                 overflow-hidden"
+      onMouseMove={e => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        e.currentTarget.style.setProperty(
+          "--x",
+          `${e.clientX - rect.left}px`
+        )
+        e.currentTarget.style.setProperty(
+          "--y",
+          `${e.clientY - rect.top}px`
+        )
+      }}
+      className="
+        relative min-h-screen overflow-hidden
+        bg-white dark:bg-slate-950
+        [--x:50%] [--y:50%]
+      "
     >
-      {/* Soft background glow */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* CURSOR SPOTLIGHT */}
+      <div
+        aria-hidden
+        className="
+          pointer-events-none absolute inset-0 z-0
+          bg-[radial-gradient(600px_at_var(--x)_var(--y),rgba(99,102,241,0.18),transparent_70%)]
+          dark:bg-[radial-gradient(600px_at_var(--x)_var(--y),rgba(56,189,248,0.16),transparent_70%)]
+        "
+      />
+
+      {/* SOFT AMBIENT GLOW */}
+      <div className="absolute inset-0 pointer-events-none z-0">
         <div
           className="absolute top-1/3 right-1/4
-                     w-[600px] h-[600px]
-                     bg-slate-200/60 dark:bg-slate-800/40
-                     rounded-full blur-[120px]"
+                     w-[700px] h-[700px]
+                     bg-gradient-to-tr
+                     from-slate-200/60 via-slate-100/40 to-transparent
+                     dark:from-slate-800/40 dark:via-slate-700/30
+                     rounded-full blur-[140px]"
         />
       </div>
 
@@ -65,6 +90,9 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="/resume.pdf"
+              download
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center gap-2
                          px-6 py-3 rounded-lg
                          bg-slate-900 text-white
@@ -73,7 +101,7 @@ export default function Hero() {
                          dark:hover:bg-slate-200
                          transition"
             >
-              <Download size={18} />
+              <Download size={18} aria-hidden />
               Download Resume
             </a>
 
@@ -95,13 +123,19 @@ export default function Hero() {
 
           {/* SOCIAL ICONS */}
           <div className="mt-8 flex gap-4">
-            <SocialIcon href="https://github.com/verjin-dev">
+            <SocialIcon href="https://github.com/verjin-dev" label="GitHub">
               <Github />
             </SocialIcon>
-            <SocialIcon href="https://linkedin.com/in/verjin-vargheese">
+            <SocialIcon
+              href="https://linkedin.com/in/verjin-vargheese"
+              label="LinkedIn"
+            >
               <Linkedin />
             </SocialIcon>
-            <SocialIcon href="mailto:verjinvargheese@gmail.com">
+            <SocialIcon
+              href="mailto:verjinvargheese@gmail.com"
+              label="Email"
+            >
               <Mail />
             </SocialIcon>
           </div>
@@ -119,6 +153,8 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
+          whileHover={{ rotateX: 4, rotateY: -4 }}
+          style={{ perspective: 1000 }}
           className="relative flex justify-center"
         >
           <div className="relative">
@@ -126,7 +162,7 @@ export default function Hero() {
               className="w-[360px] h-[360px] rounded-full
                          overflow-hidden
                          border-4 border-white dark:border-slate-900
-                         shadow-[0_40px_80px_-20px_rgba(0,0,0,0.25)]"
+                         shadow-[0_40px_80px_-20px_rgba(0,0,0,0.35)]"
             >
               <img
                 src="/profile.webp"
@@ -140,7 +176,13 @@ export default function Hero() {
             </div>
 
             {/* Availability badge */}
-            <div
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 4,
+                ease: "easeInOut",
+              }}
               className="absolute bottom-4 right-0
                          bg-white dark:bg-slate-900
                          text-slate-900 dark:text-slate-100
@@ -149,34 +191,38 @@ export default function Hero() {
                          shadow-md text-sm"
             >
               <span className="w-2 h-2 rounded-full bg-green-500" />
-              Available for hire
-            </div>
+              Open to Work
+            </motion.div>
           </div>
         </motion.div>
       </div>
 
-      {/* Scroll hint */}
-      <div
+      {/* SCROLL INDICATOR */}
+      <motion.div
+        animate={{ y: [0, 8, 0] }}
+        transition={{ repeat: Infinity, duration: 2 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2
                    text-sm
                    text-slate-400 dark:text-slate-500
-                   flex flex-col items-center"
+                   flex flex-col items-center z-10"
       >
         <span>Scroll to explore</span>
         <span className="mt-1">↓</span>
-      </div>
+      </motion.div>
     </section>
   )
 }
 
-/* ---------------- Reusable components ---------------- */
+/* ---------------- Reusable ---------------- */
 
-function SocialIcon({ href, children }) {
+function SocialIcon({ href, label, children }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noreferrer"
+      aria-label={label}
+      title={label}
       className="w-12 h-12 rounded-full
                  border border-slate-200 dark:border-slate-700
                  flex items-center justify-center
@@ -193,10 +239,12 @@ function SocialIcon({ href, children }) {
 function Stat({ value, label }) {
   return (
     <div>
-      <div className="text-2xl font-semibold text-slate-900 dark:text-white">
+      <div className="text-2xl font-semibold
+                      text-slate-900 dark:text-white">
         {value}
       </div>
-      <div className="text-sm text-slate-500 dark:text-slate-400">
+      <div className="text-sm
+                      text-slate-500 dark:text-slate-400">
         {label}
       </div>
     </div>

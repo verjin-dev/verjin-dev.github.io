@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { Github, ExternalLink } from "lucide-react"
 
 const projects = [
@@ -81,17 +82,22 @@ export default function Projects() {
             Featured Projects
           </h2>
           <p className="mt-4 text-slate-600 dark:text-slate-400">
-            Selected projects showcasing experience in AI systems,
+            Selected work demonstrating expertise in AI systems,
             full-stack development, and scalable architectures.
           </p>
         </div>
 
         {/* Grid */}
-        <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map(project => (
-            <article
+        <div className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, index) => (
+            <motion.article
               key={project.title}
-              className="rounded-2xl border
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              whileHover={{ y: -6 }}
+              className="group rounded-2xl border
                          border-slate-200 dark:border-slate-800
                          bg-white dark:bg-slate-900
                          overflow-hidden
@@ -105,18 +111,23 @@ export default function Projects() {
                   alt={project.title}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover
+                             transition-transform duration-300
+                             group-hover:scale-105"
                 />
               </div>
 
               {/* Content */}
               <div className="p-6 flex flex-col h-full">
-                <h3 className="font-medium text-slate-900 dark:text-white">
+                <h3 className="font-medium
+                               text-slate-900 dark:text-white">
                   {project.title}
                 </h3>
 
-                <p className="mt-3 text-slate-600 dark:text-slate-400
-                              text-sm leading-relaxed">
+                <p
+                  className="mt-3 text-sm leading-relaxed
+                             text-slate-600 dark:text-slate-400"
+                >
                   {project.description}
                 </p>
 
@@ -145,7 +156,8 @@ export default function Projects() {
                       className="inline-flex items-center gap-2
                                  px-4 py-2 rounded-lg
                                  border border-slate-300 dark:border-slate-700
-                                 text-sm text-slate-700 dark:text-slate-300
+                                 text-sm
+                                 text-slate-700 dark:text-slate-300
                                  hover:bg-slate-100 dark:hover:bg-slate-800
                                  transition"
                     >
@@ -153,6 +165,7 @@ export default function Projects() {
                       Code
                     </a>
                   )}
+
                   {project.demo && (
                     <a
                       href={project.demo}
@@ -172,7 +185,7 @@ export default function Projects() {
                   )}
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
 

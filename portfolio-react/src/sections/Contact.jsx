@@ -1,10 +1,11 @@
+import { motion } from "framer-motion"
 import { Mail, Phone, MapPin, Send, Clock } from "lucide-react"
 
 export default function Contact() {
   return (
     <section
       id="contact"
-      className="bg-white dark:bg-slate-950 py-28"
+      className="relative bg-white dark:bg-slate-950 py-28"
     >
       <div className="max-w-6xl mx-auto px-8">
 
@@ -20,12 +21,17 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Main Content */}
+        {/* Content */}
         <div className="mt-20 grid gap-12 md:grid-cols-2 items-start">
 
           {/* LEFT — CONTACT INFO */}
-          <div className="space-y-6">
-
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="space-y-6"
+          >
             <InfoCard
               icon={Mail}
               title="Email"
@@ -74,10 +80,14 @@ export default function Contact() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* RIGHT — FORM */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="rounded-2xl border
                        border-slate-200 dark:border-slate-800
                        bg-white dark:bg-slate-900
@@ -116,8 +126,14 @@ export default function Contact() {
                 <Send size={16} aria-hidden />
                 Send Message
               </button>
+
+              {/* Trust micro-copy */}
+              <p className="text-xs
+                            text-slate-500 dark:text-slate-500">
+                Your information is kept private and never shared.
+              </p>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,10 +1,10 @@
-import { title } from "framer-motion/client"
+import { motion } from "framer-motion"
 import {
   Code,
-  Settings,
   Globe,
-  Database,
   Cloud,
+  Database,
+  Settings,
   Beaker,
 } from "lucide-react"
 
@@ -12,121 +12,100 @@ const skills = [
   {
     title: "Programming Languages",
     icon: Code,
-    items: ["JavaScript", "Java", "SQL", "Python", "HTML", "CSS", "Dart"],
+    items: ["JavaScript", "Python", "Java", "SQL", "Dart", "HTML", "CSS"],
   },
   {
-    title: "Generative AI Tools",
+    title: "Frontend Development",
+    icon: Globe,
+    items: [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Three.js",
+      "Flutter",
+    ],
+  },
+  {
+    title: "Backend & APIs",
+    icon: Database,
+    items: [
+      "Node.js",
+      "FastAPI",
+      "Flask",
+      "Spring Boot",
+      "Express.js",
+      "REST APIs",
+    ],
+  },
+  {
+    title: "Generative AI & LLMs",
     icon: Beaker,
     items: [
-      "OpenAI GPT",
-      "Azure OpenAI",
-      "GPT-4all",
-      "Gemini AI",
-      "Hugging Face Transformers",
+      "OpenAI / Azure OpenAI",
       "LangChain",
-      "langgraph",
-      "Ollama",
-      "LLM",
-      "RAG",
+      "LangGraph",
+      "RAG Pipelines",
       "Vector Databases",
+      "Ollama",
       "Llama.cpp",
+    ],
+  },
+  {
+    title: "Machine Learning",
+    icon: Beaker,
+    items: [
+      "PyTorch",
+      "TensorFlow",
+      "scikit-learn",
+      "Pandas",
+      "NumPy",
+      "Hugging Face",
     ],
   },
   {
     title: "Cloud Platforms",
     icon: Cloud,
-    items: ["AWS", "Azure", "GCP", "Firebase", "Heroku", "render.com"],
-  },
-  {
-    title: "Gen AI & Machine Learning",
-    icon: Beaker,
     items: [
-      "OpenAI GPT",
-      "Hugging Face Transformers",
-      "LangChain",
-      "langgraph",
-      "Llama.cpp",
-      "FastAPI",
-      "scikit-learn",
-      "pandas",
-      "NumPy",
-      "TensorFlow",
-      "PyTorch",
-      "Azure AI Services",
-      "Azure Cognitive Search",
-      "Azure Machine Learning",
-      "kaggle",
-
+      "Azure",
+      "AWS",
+      "GCP",
+      "Firebase",
+      "Vercel",
+      "Render",
     ],
-  },
-  {
-    title: "Agent Frameworks",
-    icon: Beaker,
-    items: [
-      "LangChain Agents",
-      "Autogen",
-      "Langgraph Agents",
-      "Copilot Agents",
-      "Copilot Studio",
-    ],
-  },
-  {
-    title: "frontend Development",
-    icon: Globe,
-    items: ["React.js", "Next.js", "Tailwind CSS", "Chakra UI", "Framer Motion", "Three.js", "flutter"],
-  },
-  {
-    title: "Version Control",
-    icon: Settings,
-    items: ["Git", "GitHub", "GitLab", "Bitbucket","Azure DevOps","GitHub Actions","CI/CD", "Jenkins", "Jira"],
   },
   {
     title: "Databases",
     icon: Database,
-    items: ["MongoDB", "PostgreSQL", "MySQL", "SQLite", "Redis", "Firebase Firestore", "weaviate", "Pinecone", "neo4j", "quadrant" ],
+    items: [
+      "PostgreSQL",
+      "MongoDB",
+      "MySQL",
+      "SQLite",
+      "Redis",
+      "Pinecone",
+      "Weaviate",
+      "Neo4j",
+    ],
   },
   {
-    title: "DevOps & Tools",
+    title: "DevOps & Tooling",
     icon: Settings,
     items: [
       "Docker",
-      "Git",
       "Kubernetes",
+      "GitHub Actions",
       "CI/CD",
       "Terraform",
-      "Azure",
-      "GitHub Actions",
-      "AWS",
+      "Azure DevOps",
     ],
   },
   {
-    title: "JavaScript Libraries & Frameworks",
-    icon: Globe,
-    items: [
-      "React.js",
-      "Next.js",
-      "Node.js",
-      "Vanilla JS",
-      "Bun",
-      "Deno",
-    ],
-  },
-  {
-    title: "Web Frameworks",
-    icon: Database,
-    items: ["Express.js", "Fastify", "Flask", "Spring Boot", "Tailwind CSS", "Bootstrap", "Material UI", "Chakra UI", "Framer Motion", "Three.js"],
-  },
-  {
-    title: "Backend as a Service",
-    icon: Cloud,
-    items: ["Firebase", "Appwrite", "render.com", "Supabase", "Heroku", "netlify" , "Vercel"],
-  },
-  {
-    title: "Testing",
+    title: "Testing & Quality",
     icon: Beaker,
-    items: ["Jest", "pytest","python unittest"],
+    items: ["Jest", "Pytest", "Unit Testing", "Integration Testing"],
   },
-
 ]
 
 export default function Skills() {
@@ -143,21 +122,26 @@ export default function Skills() {
             Technical Skills
           </h2>
           <p className="mt-4 text-slate-600 dark:text-slate-400">
-            Comprehensive expertise across modern development stacks with
-            focus on scalable web applications and DevOps practices.
+            A focused and production-ready skill set covering AI systems,
+            full-stack development, and modern cloud infrastructure.
           </p>
         </div>
 
         {/* Grid */}
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {skills.map(({ title, icon: Icon, items }) => (
-            <div
+        <div className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.map(({ title, icon: Icon, items }, index) => (
+            <motion.div
               key={title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
               className="rounded-2xl border
                          border-slate-200 dark:border-slate-800
                          bg-white dark:bg-slate-900
                          p-6
-                         shadow-sm hover:shadow-md transition"
+                         shadow-sm hover:shadow-md
+                         transition"
             >
               <div className="flex items-center gap-3">
                 <div
@@ -187,7 +171,7 @@ export default function Skills() {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
