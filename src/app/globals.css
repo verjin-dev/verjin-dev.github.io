@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+html,
+body {
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  @apply antialiased scroll-smooth;
+}
+
+html {
+  @apply bg-slate-50 text-slate-800;
+}
+
+html.dark {
+  @apply bg-slate-950 text-slate-100;
+}
+
+/* Custom premium aesthetic utilities */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+}
+
+/* Glassmorphism panel styling */
+.glass-panel {
+  @apply bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm;
+}
+
+.glass-panel-glow {
+  @apply glass-panel shadow-[0_0_30px_-5px_rgba(139,92,246,0.15)] dark:shadow-[0_0_30px_-5px_rgba(139,92,246,0.25)];
+}
