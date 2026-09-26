@@ -1,15 +1,9 @@
-"use client"
-
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Cpu, Code2, Globe2, ShieldAlert } from "lucide-react"
+import Section from "@/components/Section"
 
 const skillCategories = [
   {
     id: "ai",
     label: "Gen-AI & Data Science",
-    icon: Cpu,
-    color: "from-violet-500 to-purple-500",
     skills: [
       { name: "Generative AI", level: "Expert" },
       { name: "LLM Orchestration", level: "Expert" },
@@ -28,8 +22,6 @@ const skillCategories = [
   {
     id: "backend",
     label: "Languages & Backend",
-    icon: Code2,
-    color: "from-blue-500 to-cyan-500",
     skills: [
       { name: "Python", level: "Expert" },
       { name: "Java", level: "Advanced" },
@@ -46,8 +38,6 @@ const skillCategories = [
   {
     id: "frontend",
     label: "Frontend & Mobile",
-    icon: Globe2,
-    color: "from-pink-500 to-rose-500",
     skills: [
       { name: "React.js", level: "Expert" },
       { name: "Next.js", level: "Expert" },
@@ -62,8 +52,6 @@ const skillCategories = [
   {
     id: "devops",
     label: "Cloud & DevOps",
-    icon: ShieldAlert,
-    color: "from-emerald-500 to-teal-500",
     skills: [
       { name: "Amazon Web Services (AWS)", level: "Advanced" },
       { name: "Microsoft Azure", level: "Expert" },
@@ -80,105 +68,85 @@ const skillCategories = [
   }
 ]
 
+const levels = [
+  { name: "Expert", score: 3 },
+  { name: "Advanced", score: 2 },
+  { name: "Intermediate", score: 1 },
+]
+
+const scoreOf = level => levels.find(l => l.name === level)?.score ?? 0
+
 export default function Skills() {
-  const [activeTab, setActiveTab] = useState("ai")
-  const currentCategory = skillCategories.find((cat) => cat.id === activeTab)
-
   return (
-    <section id="skills" className="bg-slate-50 dark:bg-slate-900 py-28 relative overflow-hidden transition-colors duration-300">
-      {/* Glow asset background */}
-      <div className="absolute left-0 top-1/4 w-[400px] h-[400px] bg-violet-500/5 rounded-full blur-[100px] pointer-events-none animate-pulse-slow" />
-
-      <div className="max-w-6xl mx-auto px-8 relative z-10">
-        
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="px-3.5 py-1.5 rounded-full border border-violet-200 dark:border-violet-800/60 bg-violet-50/60 dark:bg-violet-950/20 text-violet-600 dark:text-violet-400 text-xs font-semibold uppercase tracking-wider">
-            Expertise Catalog
-          </span>
-          <h2 className="mt-4 text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white">
-            Core Technical Skills
-          </h2>
-          <p className="mt-4 text-slate-600 dark:text-slate-400">
-            A comprehensive overview of my capabilities across modern development stacks, intelligent agentic AI integrations, and DevOps pipelines.
-          </p>
-        </div>
-
-        {/* Dynamic Category Navigation Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-16 border-b border-slate-200 dark:border-slate-800/80 pb-6 max-w-4xl mx-auto">
-          {skillCategories.map((cat) => {
-            const Icon = cat.icon
-            const isActive = activeTab === cat.id
-            return (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setActiveTab(cat.id)}
-                className={`relative flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-300 select-none ${
-                  isActive 
-                    ? "text-slate-900 dark:text-white" 
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 bg-white/40 dark:bg-slate-950/10"
-                }`}
-              >
-                {/* sliding pill selection indicator */}
-                {isActive && (
-                  <motion.span
-                    layoutId="activeSkillTab"
-                    className="absolute inset-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-sm rounded-xl"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-                
-                <span className="relative z-10 flex items-center gap-2">
-                  <Icon size={16} className={isActive ? "text-violet-500" : ""} />
-                  {cat.label}
-                </span>
-              </button>
-            )
-          })}
-        </div>
-
-        {/* Skills Filtering Display grid */}
-        <div className="max-w-4xl mx-auto min-h-[300px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.25 }}
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-            >
-              {currentCategory.skills.map((skill, idx) => (
-                <div
+    <Section
+      id="skills"
+      index="03"
+      label="Skills"
+      title="Capabilities"
+      intro="My working stack across Generative AI, backend and frontend engineering, and the cloud infrastructure that runs it."
+    >
+      {/* Matrix: gap-px over a rule-coloured background draws the hairlines */}
+      <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-px bg-rule border border-rule">
+        {skillCategories.map((cat, i) => (
+          <div key={cat.id} className="bg-paper">
+            <h3 className="flex items-center justify-between gap-3 px-4 py-3.5 border-b border-rule bg-panel
+                           font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ink">
+              <span>
+                <span className="text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mx-1.5 text-muted">//</span>
+                {cat.label}
+              </span>
+              <span className="font-normal text-muted">{cat.skills.length}</span>
+            </h3>
+            <ul className="px-4 py-2">
+              {cat.skills.map(skill => (
+                <li
                   key={skill.name}
-                  className="group rounded-2xl border border-slate-200/60 dark:border-slate-800/80 bg-white/50 dark:bg-slate-950/30 p-5 shadow-sm hover:shadow-md hover:border-slate-350 dark:hover:border-slate-700 transition duration-300 relative overflow-hidden"
+                  className="flex items-center justify-between gap-4 py-2.5 border-b border-rule last:border-b-0"
                 >
-                  {/* Hover visual accent indicator on bottom-left border */}
-                  <div className={`absolute bottom-0 left-0 h-1.5 w-0 group-hover:w-full bg-gradient-to-r ${currentCategory.color} transition-all duration-300`} />
-
-                  <div className="flex justify-between items-start gap-4">
-                    <h3 className="font-semibold text-slate-900 dark:text-white text-sm group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
-                      {skill.name}
-                    </h3>
-                    
-                    <span className={`inline-flex px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
-                      skill.level === "Expert" 
-                        ? "bg-violet-100/60 dark:bg-violet-950/30 text-violet-700 dark:text-violet-450"
-                        : skill.level === "Advanced"
-                        ? "bg-blue-100/60 dark:bg-blue-950/30 text-blue-700 dark:text-blue-450"
-                        : "bg-slate-100/60 dark:bg-slate-850/40 text-slate-600 dark:text-slate-400"
-                    }`}>
-                      {skill.level}
-                    </span>
-                  </div>
-                </div>
+                  <span className="text-[15px] leading-snug text-ink">{skill.name}</span>
+                  <Proficiency score={scoreOf(skill.level)} label={skill.level} />
+                </li>
               ))}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
+            </ul>
+          </div>
+        ))}
       </div>
-    </section>
+
+      {/* Legend */}
+      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 border border-rule bg-panel
+                      font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+        <span className="font-semibold text-ink">Proficiency</span>
+        {levels.map(l => (
+          <span key={l.name} className="flex items-center gap-2">
+            <Proficiency score={l.score} />
+            {l.name}
+          </span>
+        ))}
+      </div>
+    </Section>
+  )
+}
+
+/* ---------------- 3-square proficiency mark ---------------- */
+
+function Proficiency({ score, label }) {
+  return (
+    <span className="flex shrink-0 gap-[3px]" title={label}>
+      {label && <span className="sr-only">{label}</span>}
+      {[1, 2, 3].map(n => (
+        <span
+          key={n}
+          aria-hidden
+          className={`w-2 h-2 ${
+            n > score
+              ? "border border-muted/50"
+              : score === 3
+                ? "bg-accent"
+                : "bg-ink"
+          }`}
+        />
+      ))}
+    </span>
   )
 }

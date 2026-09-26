@@ -1,52 +1,60 @@
+import Section from "@/components/Section"
+
 export default function About() {
   const age = new Date().getFullYear() - 2000
 
+  const facts = [
+    { label: "Role", value: "Gen AI Developer, Tata Consultancy Services" },
+    { label: "Location", value: "Thiruvananthapuram, Kerala, India" },
+    { label: "Age", value: `${age} years` },
+    { label: "Education", value: "B.E. Computer Science & Engineering — CGPA 9.64" },
+    {
+      label: "Email",
+      value: "verjinvargheese@gmail.com",
+      href: "mailto:verjinvargheese@gmail.com",
+    },
+  ]
+
   return (
-    <section id="about" className="bg-slate-50 dark:bg-slate-900 py-28 transition-colors duration-300">
-      <div className="max-w-5xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
-        {/* Left Column: Image wrapper with elegant shadows */}
-        <div className="relative flex justify-center">
-          <div className="relative w-full max-w-md">
-            <img
-              src="/profile.webp"
-              alt="Verjin V"
-              className="rounded-2xl w-full object-cover border border-slate-200 dark:border-slate-800 shadow-lg"
-            />
-          </div>
+    <Section id="about" index="01" label="About" title="About me">
+      <div className="grid lg:grid-cols-12 gap-x-10 gap-y-12">
+        {/* Bio */}
+        <div className="lg:col-span-7">
+          <p className="font-display text-2xl sm:text-3xl leading-snug tracking-[-0.02em] text-ink">
+            As a GenAI Developer with 2+ years of experience, my career objective is to
+            leverage my expertise in Generative AI to develop innovative solutions that
+            address real-world challenges.
+          </p>
+          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-muted">
+            I am highly passionate about staying at the forefront of AI advancements and
+            am committed to continuous learning and professional growth, specializing in
+            building production-ready LLM pipelines, cognitive search, and cloud deployments.
+          </p>
         </div>
 
-        {/* Right Column: Bio Content */}
-        <div>
-          <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white">
-            About Me
-          </h2>
-          
-          <p className="mt-6 text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-            As a GenAI Developer with 2+ years of experience, my career objective is to leverage my expertise in Generative AI to develop innovative solutions that address real-world challenges.
-          </p>
-
-          <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed">
-            I am highly passionate about staying at the forefront of AI advancements and am committed to continuous learning and professional growth, specializing in building production-ready LLM pipelines, cognitive search, and cloud deployments.
-          </p>
-
-          <ul className="mt-8 space-y-4 border-t border-slate-200 dark:border-slate-800 pt-6 text-sm">
-            <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-              <span className="font-semibold text-slate-900 dark:text-white w-24">Age:</span>
-              <span>{age} Years</span>
-            </li>
-            <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-              <span className="font-semibold text-slate-900 dark:text-white w-24">Location:</span>
-              <span>Thiruvananthapuram, Kerala, India</span>
-            </li>
-            <li className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-              <span className="font-semibold text-slate-900 dark:text-white w-24">Email:</span>
-              <a href="mailto:verjinvargheese@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">
-                verjinvargheese@gmail.com
-              </a>
-            </li>
-          </ul>
-        </div>
+        {/* Spec sheet */}
+        <dl className="lg:col-span-5 border-t border-ink">
+          {facts.map(f => (
+            <div
+              key={f.label}
+              className="grid grid-cols-[7rem_1fr] gap-4 py-3.5 border-b border-rule"
+            >
+              <dt className="pt-0.5 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                {f.label}
+              </dt>
+              <dd className="text-[15px] text-ink break-words">
+                {f.href ? (
+                  <a href={f.href} className="underline decoration-rule underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">
+                    {f.value}
+                  </a>
+                ) : (
+                  f.value
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
-    </section>
+    </Section>
   )
 }
