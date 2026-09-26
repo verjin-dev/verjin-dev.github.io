@@ -1,292 +1,237 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, Download, Play, Terminal as TerminalIcon } from "lucide-react"
+import { motion, MotionConfig } from "framer-motion"
+import { ArrowRight } from "lucide-react"
 
-// Typing roles
-const roles = [
-  "Gen-AI Systems Engineer",
-  "LLM Integration Expert",
-  "Full-Stack Web Innovator",
-  "Azure Cloud Specialist"
+const channels = [
+  { label: "GitHub", href: "https://github.com/verjin-dev" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/verjin-vargheese" },
+  { label: "Email", href: "mailto:verjinvargheese@gmail.com" },
 ]
 
+const stats = [
+  { value: "20+", label: "AI models built" },
+  { value: "2+", label: "Years experience" },
+  { value: "10+", label: "Certifications" },
+]
+
+const stack = [
+  "Python",
+  "LangGraph",
+  "LangChain",
+  "Azure OpenAI",
+  "Azure AI Search",
+  "RAG",
+  "Next.js",
+  "FastAPI",
+  "Prompt Engineering",
+]
+
+// Shared fade-up entrance, staggered by `delay`.
+const rise = (delay = 0) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+})
+
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0)
-  const [displayText, setDisplayText] = useState("")
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  // Typing effect
-  useEffect(() => {
-    let timer
-    const currentFullText = roles[roleIndex]
-    const typingSpeed = isDeleting ? 40 : 80
-
-    if (!isDeleting && displayText === currentFullText) {
-      // Hold state before deleting
-      timer = setTimeout(() => setIsDeleting(true), 2500)
-    } else if (isDeleting && displayText === "") {
-      setIsDeleting(false)
-      setRoleIndex((prev) => (prev + 1) % roles.length)
-    } else {
-      timer = setTimeout(() => {
-        setDisplayText(
-          isDeleting
-            ? currentFullText.substring(0, displayText.length - 1)
-            : currentFullText.substring(0, displayText.length + 1)
-        )
-      }, typingSpeed)
-    }
-
-    return () => clearTimeout(timer)
-  }, [displayText, isDeleting, roleIndex])
-
   return (
-    <section
-      id="hero"
-      className="relative min-h-[92vh] flex items-center bg-slate-50 dark:bg-slate-950 bg-grid-pattern overflow-hidden pt-12"
-    >
-      {/* Soft floating background neon colors */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-violet-500/10 dark:bg-violet-500/5 rounded-full blur-[120px] animate-pulse-slow" />
-        <div className="absolute bottom-1/4 left-1/3 w-[450px] h-[450px] bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-[100px]" />
-      </div>
+    <MotionConfig reducedMotion="user">
+      <section
+        id="hero"
+        className="relative flex flex-col min-h-[calc(100svh-4rem)] bg-paper text-ink
+                   selection:bg-accent selection:text-paper transition-colors duration-300"
+      >
+        <div className="flex-1 flex flex-col w-full max-w-7xl mx-auto px-4 sm:px-8">
+          {/* ---------------- Statement + Figure ---------------- */}
+          <div className="flex-1 grid lg:grid-cols-12 gap-14 lg:gap-10 items-center py-10 lg:py-12">
+            {/* LEFT: statement, CTAs, channels */}
+            <div className="lg:col-span-7">
+              <motion.p
+                {...rise(0)}
+                className="flex items-start gap-2.5 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.12em] text-muted"
+              >
+                <span className="relative flex h-2 w-2 mt-[3px] shrink-0">
+                  <span className="absolute inset-0 bg-emerald-500 opacity-75 animate-ping" />
+                  <span className="relative h-2 w-2 bg-emerald-600" />
+                </span>
+                <span>Available for work — Gen-AI Engineer, Thiruvananthapuram IN</span>
+              </motion.p>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-8 w-full py-16 grid lg:grid-cols-12 gap-12 items-center">
-        {/* LEFT COLUMN: Texts & Actions (Grid 7 cols) */}
-        <div className="lg:col-span-7 space-y-6">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-violet-200 dark:border-violet-800/60 bg-violet-50/60 dark:bg-violet-950/20 text-violet-600 dark:text-violet-400 text-xs font-semibold uppercase tracking-wider"
-          >
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
-            <span>Available for Hire</span>
-          </motion.div>
+              <motion.h1
+                {...rise(0.08)}
+                className="mt-6 font-display font-semibold text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.25rem]
+                           leading-[1.02] tracking-[-0.04em] text-ink"
+              >
+                I build AI systems
+                <br />
+                that <span className="text-accent">ship</span>
+                <br />
+                to production.
+              </motion.h1>
 
-          <div className="space-y-4">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]"
-            >
-              Hello, I&apos;m <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 via-purple-500 to-cyan-500 dark:from-violet-400 dark:via-purple-400 dark:to-cyan-400">
-                Verjin Vargheese
-              </span>
-            </motion.h1>
+              <motion.p
+                {...rise(0.16)}
+                className="mt-7 max-w-xl text-[17px] leading-relaxed text-muted"
+              >
+                Gen-AI Engineer designing retrieval-augmented generation pipelines,
+                LLM agents and resilient full-stack applications on Azure.
+              </motion.p>
 
-            {/* Typewriter role sub-heading */}
+              <motion.div {...rise(0.24)} className="mt-9 flex flex-wrap gap-3">
+                <a
+                  href="#projects"
+                  className="group inline-flex items-center gap-2 px-5 py-3.5 bg-ink text-paper
+                             font-mono text-xs uppercase tracking-[0.14em]
+                             hover:bg-accent transition-colors duration-150"
+                >
+                  View projects
+                  <ArrowRight
+                    size={14}
+                    aria-hidden
+                    className="transition-transform duration-150 group-hover:translate-x-0.5"
+                  />
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center px-5 py-3.5 border border-ink text-ink
+                             font-mono text-xs uppercase tracking-[0.14em]
+                             hover:bg-ink hover:text-paper transition-colors duration-150"
+                >
+                  Get in touch
+                </a>
+              </motion.div>
+
+              <motion.div
+                {...rise(0.32)}
+                className="mt-10 pt-4 border-t border-rule flex flex-wrap items-center gap-x-4 gap-y-2
+                           font-mono text-[11px] uppercase tracking-[0.12em] text-muted"
+              >
+                <span className="font-semibold text-ink">Channels //</span>
+                {channels.map((c, i) => (
+                  <span key={c.label} className="flex items-center gap-4">
+                    {i > 0 && <span aria-hidden className="text-rule">/</span>}
+                    <a
+                      href={c.href}
+                      target={c.href.startsWith("http") ? "_blank" : undefined}
+                      rel="noreferrer"
+                      className="hover:text-accent transition-colors"
+                    >
+                      {c.label}
+                    </a>
+                  </span>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* RIGHT: portrait plate + "Now" card */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="h-10 text-xl md:text-2xl font-semibold text-slate-700 dark:text-slate-350 flex items-center"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-5 flex justify-center lg:justify-end pb-8"
             >
-              <span className="text-violet-600 dark:text-violet-400">#</span>
-              <span className="ml-1.5">{displayText}</span>
-              <span className="w-1 h-6 bg-slate-500 dark:bg-slate-400 ml-1.5 animate-pulse" />
+              <figure className="relative w-full max-w-[380px]">
+                <div className="border border-rule bg-panel p-2">
+                  <figcaption className="flex items-center justify-between px-1.5 pb-2 mb-2 border-b border-rule
+                                         font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+                    <span>Fig. 01 — Verjin V.</span>
+                    <span>Portrait</span>
+                  </figcaption>
+
+                  <div className="relative aspect-[4/5] overflow-hidden border border-rule">
+                    <img
+                      src="/profile.webp"
+                      alt="Portrait of Verjin Vargheese"
+                      width={720}
+                      height={720}
+                      className="h-full w-full object-cover object-[50%_30%]"
+                    />
+                    <Reticles />
+                  </div>
+
+                  {/* Right-aligned: the Now card overlaps the left of this row */}
+                  <p className="px-1.5 pt-2 text-right font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+                    8.5241° N, 76.9366° E
+                  </p>
+                </div>
+
+                {/* Now card */}
+                <div className="absolute -bottom-8 left-3 sm:-left-8 max-w-[260px] border border-ink bg-paper p-4">
+                  <div className="flex items-center justify-between gap-6 pb-1.5 mb-2 border-b border-rule
+                                  font-mono text-[10px] uppercase tracking-[0.14em]">
+                    <span className="flex items-center gap-1.5 font-semibold text-accent">
+                      <span className="h-1.5 w-1.5 bg-accent" />
+                      Now
+                    </span>
+                    <span className="text-muted">Active focus</span>
+                  </div>
+                  <p className="text-sm font-medium leading-snug text-ink">
+                    Building agentic RAG with LangGraph + Azure AI Search
+                  </p>
+                </div>
+              </figure>
             </motion.div>
           </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-slate-650 dark:text-slate-300 text-lg max-w-xl leading-relaxed"
-          >
-            Gen-AI Engineer focused on building and optimizing production-grade intelligent systems, scalable retrieval-augmented generation (RAG) models, and resilient full-stack applications.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex flex-wrap gap-4"
-          >
-            <a
-              href="#projects"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 font-medium transition-all shadow-md hover:shadow-lg dark:shadow-slate-950/20"
-            >
-              <span>View Creations</span>
-            </a>
-
-            <a
-              href="mailto:verjinvargheese@gmail.com"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/40 dark:bg-slate-900/40 backdrop-blur text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-850 font-medium transition-all"
-            >
-              <Mail size={18} />
-              <span>Reach Out</span>
-            </a>
-          </motion.div>
-
-          {/* Social icons */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="flex gap-4 pt-4"
-          >
-            <SocialLink href="https://github.com/verjin-dev">
-              <Github size={20} />
-            </SocialLink>
-            <SocialLink href="https://linkedin.com/in/verjin-vargheese">
-              <Linkedin size={20} />
-            </SocialLink>
-            <SocialLink href="mailto:verjinvargheese@gmail.com">
-              <Mail size={20} />
-            </SocialLink>
-          </motion.div>
-
-          {/* Mini Counter Stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="grid grid-cols-3 gap-6 pt-8 max-w-md border-t border-slate-200 dark:border-slate-900"
-          >
-            <StatCard value="20+" label="AI Models Built" />
-            <StatCard value="2+" label="Years Experience" />
-            <StatCard value="10+" label="Tech Certifications" />
-          </motion.div>
+          {/* ---------------- Stats ---------------- */}
+          <ul className="grid grid-cols-3 border-t border-rule">
+            {stats.map((s, i) => (
+              <li
+                key={s.label}
+                className="bg-panel px-3 py-5 sm:p-6 border-r border-rule last:border-r-0"
+              >
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="font-display font-semibold text-3xl sm:text-4xl tracking-[-0.03em] text-ink">
+                    {s.value}
+                  </span>
+                  <span aria-hidden className="hidden sm:inline font-mono text-[10px] font-semibold text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <p className="mt-2 font-mono text-[9px] sm:text-[11px] uppercase tracking-[0.06em] sm:tracking-[0.12em] text-muted">
+                  {s.label}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* RIGHT COLUMN: Interactive Mock Developer Terminal (Grid 5 cols) */}
-        <div className="lg:col-span-5 relative flex justify-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full max-w-md"
-          >
-            {/* Background glowing frame */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-violet-500 to-cyan-500 rounded-3xl blur-2xl opacity-15 dark:opacity-20 pointer-events-none" />
-
-            {/* Code Terminal */}
-            <Terminal />
-          </motion.div>
+        {/* ---------------- Stack marquee ---------------- */}
+        <div className="border-t border-rule bg-panel overflow-hidden select-none">
+          <p className="sr-only">Stack: {stack.join(", ")}</p>
+          <div aria-hidden className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+            {[0, 1].map(copy => (
+              <ul
+                key={copy}
+                className="flex items-center py-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-ink"
+              >
+                {stack.map(item => (
+                  <li key={item} className="flex items-center">
+                    <span className="px-5">{item}</span>
+                    <span className="text-accent">·</span>
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </MotionConfig>
   )
 }
 
-/* ---------------- Reusable Sub-Components ---------------- */
+/* ---------------- Corner reticles on the portrait ---------------- */
 
-function SocialLink({ href, children }) {
+function Reticles() {
+  // The photo is light in both themes, so the marks stay dark.
+  const base = "absolute w-2.5 h-2.5 border-black/50"
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      className="w-11 h-11 rounded-xl flex items-center justify-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-violet-500 hover:text-violet-500 dark:hover:border-violet-400 dark:hover:text-violet-400 hover:shadow-sm transition-all"
-    >
-      {children}
-    </a>
+    <>
+      <span className={`${base} top-2 left-2 border-t border-l`} />
+      <span className={`${base} top-2 right-2 border-t border-r`} />
+      <span className={`${base} bottom-2 left-2 border-b border-l`} />
+      <span className={`${base} bottom-2 right-2 border-b border-r`} />
+    </>
   )
 }
-
-function StatCard({ value, label }) {
-  return (
-    <div>
-      <div className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white font-display">
-        {value}
-      </div>
-      <div className="text-xs text-slate-500 dark:text-slate-450 mt-1 uppercase tracking-wider font-semibold">
-        {label}
-      </div>
-    </div>
-  )
-}
-
-// Live typing mock agent terminal
-function Terminal() {
-  const [logs, setLogs] = useState([])
-
-  const steps = [
-    { text: "pip install langgraph langchain-openai weaviate", color: "text-slate-300", delay: 1000 },
-    { text: "python run_rag_agent.py", color: "text-violet-400", delay: 1500 },
-    { text: "[sys] Initializing LLM System ... [OK]", color: "text-slate-400", delay: 800 },
-    { text: "[sys] Connecting to Azure AI Search Cluster ... [OK]", color: "text-slate-400", delay: 1000 },
-    { text: "[sys] Loading knowledge database embeddings ... [OK]", color: "text-slate-400", delay: 1200 },
-    { text: "[agent] System ready! Injecting prompt: 'Design architecture'", color: "text-green-400", delay: 1200 },
-    { text: "[agent] Querying vector DB: 'Design architecture' ... Found 4 chunks", color: "text-cyan-400", delay: 1000 },
-    { text: "[agent] LLM: Generating optimal system topology graph ... Done!", color: "text-cyan-400", delay: 1500 },
-    { text: "Success! Token Usage: 345 Prompt, 512 Completion", color: "text-emerald-500 font-semibold", delay: 1000 },
-  ]
-
-  useEffect(() => {
-    let timeoutId
-
-    let currentStep = 0
-    const executeStep = () => {
-      if (currentStep < steps.length) {
-        setLogs((prev) => {
-          if (prev.length >= steps.length) return prev
-          return [...prev, steps[currentStep]]
-        })
-        const currentDelay = steps[currentStep].delay
-        currentStep++
-        timeoutId = setTimeout(executeStep, currentDelay)
-      } else {
-        // Reset terminal loop after 5s
-        timeoutId = setTimeout(() => {
-          setLogs([])
-          currentStep = 0
-          executeStep()
-        }, 5000)
-      }
-    }
-
-    executeStep()
-
-    return () => {
-      clearTimeout(timeoutId)
-    }
-  }, [])
-
-  return (
-    <div className="w-full bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden font-mono text-xs text-left h-[330px] flex flex-col">
-      {/* Header bar */}
-      <div className="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-500/80" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-          <div className="w-3 h-3 rounded-full bg-green-500/80" />
-        </div>
-        <div className="flex items-center gap-1.5 text-slate-500">
-          <TerminalIcon size={12} />
-          <span className="text-[10px] uppercase font-semibold tracking-wider">python3 · RAG_agent</span>
-        </div>
-        <div className="w-4 h-4" /> {/* spacer */}
-      </div>
-
-      {/* Code / Logs area */}
-      <div className="p-5 flex-1 overflow-y-auto space-y-2 bg-slate-950/80">
-        <div className="text-slate-500"># Verjin Dev RAG chatbot environment</div>
-        
-        {logs.map((log, idx) => {
-          if (!log) return null
-          return (
-            <div key={idx} className={`${log.color || "text-slate-300"} leading-relaxed`}>
-              {(log.text?.startsWith("pip") || log.text?.startsWith("python")) ? (
-                <span className="text-violet-500 mr-1.5">$</span>
-              ) : null}
-              {log.text}
-            </div>
-          )
-        })}
-
-        <div className="flex items-center gap-1 text-slate-500">
-          <span>$</span>
-          <span className="w-1.5 h-3.5 bg-slate-400 animate-pulse" />
-        </div>
-      </div>
-    </div>
-  )
-}
-

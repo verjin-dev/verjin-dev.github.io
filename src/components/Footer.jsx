@@ -1,13 +1,7 @@
-import {
-  Github,
-  Linkedin,
-  Mail,
-  Phone,
-  ArrowUpRight,
-} from "lucide-react"
+import { ArrowUp, ArrowUpRight } from "lucide-react"
 
 const links = [
-  { label: "Home", href: "#hero" },
+  { label: "About", href: "#about" },
   { label: "Journey", href: "#journey" },
   { label: "Skills", href: "#skills" },
   { label: "Certificates", href: "#certificates" },
@@ -23,153 +17,90 @@ const focus = [
   "Full-Stack Engineering",
 ]
 
+const channels = [
+  { label: "GitHub", href: "https://github.com/verjin-dev" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/verjin-vargheese" },
+  { label: "Email", href: "mailto:verjinvargheese@gmail.com" },
+  { label: "Phone", href: "tel:+919080181819" },
+]
+
+/* Always a dark band: ink-on-paper inverted in light mode, a raised panel in dark mode. */
 export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-slate-950
-                       border-t border-slate-200 dark:border-slate-800">
-      <div className="max-w-7xl mx-auto px-8 py-20">
+    <footer className="bg-ink text-paper dark:bg-panel dark:text-ink border-t border-rule transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-16 md:pt-20 pb-8">
+        {/* Wordmark */}
+        <a
+          href="#hero"
+          className="block font-display font-semibold leading-[0.85] tracking-[-0.05em]
+                     text-[22vw] sm:text-[18vw] lg:text-[13rem]"
+        >
+          Verjin V.
+        </a>
 
-        {/* TOP GRID */}
-        <div className="grid gap-12 md:grid-cols-4">
-
-          {/* BRAND */}
-          <div className="md:col-span-2">
-            <h3 className="text-xl font-semibold
-                           text-slate-900 dark:text-white">
-              Verjin V
-            </h3>
-
-            <p className="mt-3 max-w-md
-                          text-slate-600 dark:text-slate-400">
-              Gen-AI Engineer focused on building production-ready
-              intelligent systems, scalable architectures, and
-              enterprise AI solutions.
-            </p>
-
-            {/* CTA */}
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 mt-6
-                         px-5 py-3 rounded-lg
-                         bg-slate-900 dark:bg-white
-                         text-white dark:text-slate-900
-                         hover:bg-slate-800 dark:hover:bg-slate-200
-                         transition"
-            >
-              Let’s work together
-              <ArrowUpRight size={16} aria-hidden />
-            </a>
-          </div>
-
-          {/* QUICK LINKS */}
-          <div>
-            <h4 className="font-medium
-                           text-slate-900 dark:text-white">
-              Quick Links
-            </h4>
-            <ul className="mt-4 space-y-3">
-              {links.map(link => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm
-                               text-slate-600 dark:text-slate-400
-                               hover:text-slate-900 dark:hover:text-white
-                               transition"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* FOCUS AREAS */}
-          <div>
-            <h4 className="font-medium
-                           text-slate-900 dark:text-white">
-              Focus Areas
-            </h4>
-            <ul className="mt-4 space-y-2">
-              {focus.map(item => (
-                <li
-                  key={item}
-                  className="text-sm
-                             text-slate-600 dark:text-slate-400"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* DIVIDER */}
-        <div className="my-12
-                        border-t border-slate-200 dark:border-slate-800" />
-
-        {/* BOTTOM BAR */}
-        <div className="flex flex-col md:flex-row
-                        items-center justify-between gap-6">
-
-          {/* COPYRIGHT */}
-          <p className="text-sm
-                        text-slate-500 dark:text-slate-400">
-            © {new Date().getFullYear()} Verjin V. All rights reserved.
+        <div className="mt-12 md:mt-16 pt-10 border-t border-paper/15 dark:border-rule
+                        grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
+          <p className="col-span-2 md:col-span-1 max-w-xs text-[15px] leading-relaxed text-paper/65 dark:text-muted">
+            Gen-AI Engineer focused on building production-ready intelligent systems,
+            scalable architectures, and enterprise AI solutions.
           </p>
 
-          {/* SOCIAL */}
-          <div className="flex gap-4">
-            <Social
-              href="https://github.com/verjin-dev"
-              label="GitHub"
-            >
-              <Github />
-            </Social>
-            <Social
-              href="https://linkedin.com/in/verjin-vargheese"
-              label="LinkedIn"
-            >
-              <Linkedin />
-            </Social>
-            <Social
-              href="mailto:verjinvargheese@gmail.com"
-              label="Email"
-            >
-              <Mail />
-            </Social>
-            <Social
-              href="tel:+919080181819"
-              label="Phone"
-            >
-              <Phone />
-            </Social>
-          </div>
+          <FooterColumn title="Index">
+            {links.map(link => (
+              <li key={link.label}>
+                <a href={link.href} className="underline-offset-4 decoration-1 hover:underline">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </FooterColumn>
+
+          <FooterColumn title="Focus">
+            {focus.map(item => (
+              <li key={item}>{item}</li>
+            ))}
+          </FooterColumn>
+
+          <FooterColumn title="Channels">
+            {channels.map(c => (
+              <li key={c.label}>
+                <a
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 underline-offset-4 decoration-1 hover:underline"
+                >
+                  {c.label}
+                  <ArrowUpRight size={13} aria-hidden />
+                </a>
+              </li>
+            ))}
+          </FooterColumn>
+        </div>
+
+        <div className="mt-14 pt-6 border-t border-paper/15 dark:border-rule
+                        flex flex-wrap items-center justify-between gap-4
+                        font-mono text-[11px] uppercase tracking-[0.14em] text-paper/65 dark:text-muted">
+          <p>© {new Date().getFullYear()} Verjin V. All rights reserved.</p>
+          <a href="#hero" className="inline-flex items-center gap-1.5 underline-offset-4 decoration-1 hover:underline">
+            Back to top
+            <ArrowUp size={13} aria-hidden />
+          </a>
         </div>
       </div>
     </footer>
   )
 }
 
-/* ---------------- Social Button ---------------- */
-
-function Social({ href, label, children }) {
+function FooterColumn({ title, children }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      aria-label={label}
-      title={label}
-      className="w-10 h-10 rounded-lg
-                 flex items-center justify-center
-                 border border-slate-200 dark:border-slate-700
-                 text-slate-600 dark:text-slate-300
-                 hover:bg-slate-100 dark:hover:bg-slate-800
-                 hover:text-slate-900 dark:hover:text-white
-                 transition"
-    >
-      {children}
-    </a>
+    <div>
+      <h3 className="mb-4 font-mono text-[10px] font-normal uppercase tracking-[0.14em] text-paper/65 dark:text-muted">
+        {title}
+      </h3>
+      <ul className="space-y-2.5 font-mono text-[13px] tracking-[0.04em]">
+        {children}
+      </ul>
+    </div>
   )
 }
